@@ -1,4 +1,5 @@
 from pathlib import Path
+from models import ScanResult
 
 # Add ignored directories
 IGNORE_DIRS = {
@@ -11,7 +12,7 @@ IGNORE_DIRS = {
 }
 
 
-def scan_folder(folder_path: Path, on_progress=None):
+def scan_folder(folder_path: Path, on_progress = None):
     files = []
     total_size = 0
     processed = 0
@@ -37,12 +38,11 @@ def scan_folder(folder_path: Path, on_progress=None):
             # Scanner does NOT log — just skips
             continue
 
-    return {
-        "files": files,
-        "total_size": total_size,
-        "processed": processed,
-    }
-
+    return ScanResult(
+        files = files,
+        total_size = total_size,
+        processed = processed,
+    )
 
 def count_files(folder_path: Path) -> int:
     count = 0
